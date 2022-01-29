@@ -1,16 +1,17 @@
 import java.awt.Button;
 import java.util.concurrent.TimeUnit;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.validator.PublicClassValidator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.interactions.ClickAction;
 import org.openqa.selenium.support.ui.Select;
 
@@ -19,15 +20,19 @@ public class TestPaginaBase2Camp {
 	@Test
 	public void teste() {
 		
+		//Localizar logo Base2</>CAMP
+		
+		
 		//Abrir Formulário de Candidatura ao Base2Camp 
 		WebDriver driver = new ChromeDriver();
 		driver.manage().window().maximize();
+		//driver.manage().window().setSize(new Dimension(800, 800));
 		driver.get("https://app.pipefy.com/public/form/pITmZMtR");
 		
 		//Preencher campo (Nome completo)
 		driver.findElement(By.name("customFields.nome_do_candidato")).sendKeys("Miller Cardoso Barros");
 		Assert.assertEquals("Miller Cardoso Barros", driver.findElement(By.name("customFields.nome_do_candidato")).getAttribute("value"));
-
+		
 		//Preencher campo (E-mail)		
 		driver.findElement(By.name("customFields.e_mail_do_candidato_1")).sendKeys("millerkbarros@gmail.com");
 		Assert.assertEquals("millerkbarros@gmail.com", driver.findElement(By.name("customFields.e_mail_do_candidato_1")).getAttribute("value"));
@@ -61,12 +66,19 @@ public class TestPaginaBase2Camp {
 		
 		//Preecher campo (Pretensão salarial)
 	    driver.findElement(By.name("customFields.pretens_o_salarial")).sendKeys("0,00");
+	    Assert.assertEquals("0,00", driver.findElement(By.name("customFields.pretens_o_salarial")).getAttribute("value"));
 		
 		//Localizar botão (Solte arquivos para anexar, ou Busque)
 	    driver.findElement(By.xpath("//div[@id=\'dropzone-fake-pipe-field-publicForm-customFields_curr_culo-input\']/div[2]/div/a/span"));
 	    
 	    //Localizar botão (Enviar)
-	    driver.findElement(By.xpath("//button[@type=\'submit\']"));
+	    driver.findElement(By.xpath("//button[contains(.,'Enviar')]"));
 	    
+	    //Retornar ao campo (Nome Completo)
+	    driver.findElement(By.name("customFields.nome_do_candidato")).click();
+	    		    
+	    //Fechar o browser
+	    //driver.quit();
+	    //driver.close();
 	}
 }
