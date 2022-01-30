@@ -1,4 +1,5 @@
 import java.awt.Button;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.junit.Assert;
 import org.junit.Test;
@@ -15,6 +16,9 @@ import org.openqa.selenium.support.ui.Select;
 
 public class TesteCampoTreinamento {
 	
+private List<WebElement> allSelectedOptions;
+
+
 //	driver.manage().window().maximize();		
 //	driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");	
 //	comando para digitar em um determinado campo
@@ -59,9 +63,68 @@ public class TesteCampoTreinamento {
 		Assert.assertTrue(driver.findElement(By.id("elementosForm:comidaFavorita:2")).isSelected());
 		driver.quit();
 		
-		
-		
-		
 	}
 
+	@Test
+	public void deveInteragirComCombo(){
+		WebDriver driver = new ChromeDriver();
+		driver.manage().window().setSize(new Dimension(1200, 765));
+		driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+		WebElement element = driver.findElement(By.id("elementosForm:escolaridade"));
+		Select combo = new Select(element);
+//		combo.selectByIndex(5);
+//		combo.selectByValue("superior");
+		combo.selectByVisibleText("2o grau incompleto");
+		Assert.assertEquals("2o grau incompleto", combo.getFirstSelectedOption().getText());
+		
+//		driver.findElement(By.id("elementosForm:escolaridade")).click();
+//		WebElement dropdown = driver.findElement(By.id("elementosForm:escolaridade"));
+//		dropdown.findElement(By.xpath("//*[@id=\"elementosForm:escolaridade\"]/option[6]")).click();
+			
+	}
+
+	@Test
+	public void deveVerificarValoresCombo(){
+		WebDriver driver = new ChromeDriver();
+		driver.manage().window().setSize(new Dimension(1200, 765));
+		driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+		WebElement element = driver.findElement(By.id("elementosForm:escolaridade"));
+		Select combo = new Select(element);
+		List<WebElement> options = combo.getOptions();
+		Assert.assertEquals(8, options.size());
+
+//		Verificar se alguma determina opção está disponível no COMBO				
+		boolean encontrou = false;
+		for(WebElement option: options) {
+			if(option.getText().equals("Mestrado"));
+				encontrou = true;
+				break;
+			
+		}
+		Assert.assertTrue(encontrou);
+	}
+
+
+	@Test
+	public void deveVerificarValoresComboMultiplo(){
+		WebDriver driver = new ChromeDriver();
+		driver.manage().window().setSize(new Dimension(1200, 765));
+		driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+		WebElement element = driver.findElement(By.id("elementosForm:esportes"));
+		Select combo = new Select(element);
+		combo.selectByVisibleText("Natacao");
+		combo.selectByVisibleText("Corrida");
+		combo.selectByVisibleText("O que eh esporte?");
+	
+		List<WebElement> allSelectedOpetions = combo.getAllSelectedOptions();
+		Assert.assertEquals(3, allSelectedOptions.size());
+		
+//		desmarcar uma das opções do COMBO
+		combo.deselectByVisibleText("Corrida");
+		allSelectedOptions = combo.getAllSelectedOptions();
+		Assert.assertEquals(2,  allSelectedOptions.size());
+		
+		
+		driver.quit();
+	}	
 }

@@ -49,6 +49,13 @@ public class TestPaginaBase2Camp {
 		driver.findElement(By.name("customFields.de_onde_voc")).click();
 	    WebElement dropdown = driver.findElement(By.name("customFields.de_onde_voc"));
 	    dropdown.findElement(By.xpath("//option[. = 'Rio de Janeiro e região metropolitana, RJ']")).click();
+		
+	    //outra maneira de selecionar um valor no COMBO(BOX)
+		//WebElement element = driver.findElement(By.name("customFields.de_onde_voc"));
+		//Select combo = new Select(element);
+		//combo.selectByIndex(19);
+	    //combo.selectByValue("Rio de Janeiro e região metropolitana, RJ");
+			
 	    
 	    //Preencher campo (Como ficou sabendo sobre o Base2Camp?)
 	    driver.findElement(By.name("customFields.nome_de_quem_indicou")).sendKeys("Linkedin");
