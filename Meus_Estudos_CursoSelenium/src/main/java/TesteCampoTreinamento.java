@@ -116,15 +116,43 @@ private List<WebElement> allSelectedOptions;
 		combo.selectByVisibleText("Corrida");
 		combo.selectByVisibleText("O que eh esporte?");
 	
-		List<WebElement> allSelectedOpetions = combo.getAllSelectedOptions();
+		List<WebElement> allSelectedOptions = combo.getAllSelectedOptions();
 		Assert.assertEquals(3, allSelectedOptions.size());
 		
 //		desmarcar uma das opções do COMBO
 		combo.deselectByVisibleText("Corrida");
 		allSelectedOptions = combo.getAllSelectedOptions();
-		Assert.assertEquals(2,  allSelectedOptions.size());
+		Assert.assertEquals(2, allSelectedOptions.size());
 		
 		
 		driver.quit();
-	}	
+	}
+	
+	@Test
+	public void deveInteragirComBotoes(){
+		WebDriver driver = new ChromeDriver();
+		driver.manage().window().setSize(new Dimension(1200, 765));
+		driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+		WebElement botao = driver.findElement(By.id("buttonSimple"));
+		botao.click();
+		
+		Assert.assertEquals("Obrigado!", botao.getAttribute("value"));
+		driver.quit();
+	}
+	
+	@Test
+	public void deveInteragirComLinks(){
+		WebDriver driver = new ChromeDriver();
+		driver.manage().window().setSize(new Dimension(1200, 765));
+		driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+
+		driver.findElement(By.linkText("Voltar")).click();
+		
+				
+		
+		
+		
+		
+		
+	}
 }
