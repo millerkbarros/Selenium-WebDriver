@@ -2,6 +2,7 @@ import java.awt.Button;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.validator.PublicClassValidator;
 import org.openqa.selenium.By;
@@ -141,6 +142,7 @@ private List<WebElement> allSelectedOptions;
 	}
 	
 	@Test
+	@Ignore 
 	public void deveInteragirComLinks(){
 		WebDriver driver = new ChromeDriver();
 		driver.manage().window().setSize(new Dimension(1200, 765));
@@ -148,11 +150,38 @@ private List<WebElement> allSelectedOptions;
 
 		driver.findElement(By.linkText("Voltar")).click();
 		
-				
+		Assert.assertEquals("Voltou", driver.findElement(By.id("resultado")).getText());
 		
+}
+	//Elementos básicos: Div e Span
+	@Test
+	public void deveBuscarTextosNaPagina(){
+		WebDriver driver = new ChromeDriver();
+		driver.manage().window().setSize(new Dimension(1200, 765));
+		driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+
+//		Assert.assertTrue(driver.findElement(By.tagName("body"))
+//					.getText().contains("Campo de Treinamento"));
+		Assert.assertEquals("Campo de Treinamento",
+					driver.findElement(By.tagName("h3")).getText());
 		
-		
-		
-		
+		Assert.assertEquals("Cuidado onde clica, muitas armadilhas...",
+					driver.findElement(By.className("facilAchar")).getText());
+		driver.quit();
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
