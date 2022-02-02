@@ -1,6 +1,5 @@
 import java.awt.Button;
 import java.util.concurrent.TimeUnit;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -18,6 +17,8 @@ public class TestePaginaWebJumper {
 	@Test
 	public void cenario1() {
 		WebDriver driver = new ChromeDriver();
+
+//		CENÁRIO 1
 //		Crie um cenário onde clicamos nos botões "One", "Two, e "Four", depois 
 //		verifique a ausência dos mesmos.		
 		driver.manage().window().maximize();		
@@ -29,6 +30,7 @@ public class TestePaginaWebJumper {
 		Assert.assertFalse(driver.findElement(By.id("btn_two")).isSelected());
 		Assert.assertFalse(driver.findElement(By.id("btn_link")).isSelected());
 		
+//		CENÁRIO 2		
 // 		Dentro da mesma página, clique nos botões "One",
 //		"Two" e "Four" que encontram-se dentro do painel
 //		"IFRAME BUTTONS" e valide a não-presença dos mesmos.
@@ -40,10 +42,11 @@ public class TestePaginaWebJumper {
 	    Assert.assertFalse(driver.findElement(By.id("btn_one")).isSelected());		
 		Assert.assertFalse(driver.findElement(By.id("btn_two")).isSelected());
 		Assert.assertFalse(driver.findElement(By.id("btn_link")).isSelected());
-		driver.quit();
+	//	driver.quit();
 		
 	}
 		
+//		CENARIO 3
 // 		No cenário final, iremos preencher o campo "YourFirstName" 
 //		com um texto qualquer. Clique no botão "One", cheque a 
 //		opção "OptionThree", selecione a opção "ExampleTwo" dentro 
