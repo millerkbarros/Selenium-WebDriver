@@ -10,35 +10,61 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.ClickAction;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
 public class TestePaginaWebJumper {
 	
 	@Test
-	public void teste() {
+	public void cenario1() {
 		WebDriver driver = new ChromeDriver();
-//		driver.manage().window().maximize();		
-//		driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+//		Crie um cenário onde clicamos nos botões "One", "Two, e "Four", depois 
+//		verifique a ausência dos mesmos.		
+		driver.manage().window().maximize();		
 		driver.get("https://wejump-automation-test.github.io/qa-test/");
-		driver.findElement(By.id("first_name")).sendKeys("Miller");
-		driver.findElement(By.id("mid_name")).sendKeys("Cardoso");
-		driver.findElement(By.id("last_name")).sendKeys("Barros");
-		driver.findElement(By.id("age")).sendKeys("35");
-		driver.findElement(By.id("email")).sendKeys("millerkbarros@gmail.com");
-		driver.findElement(By.id("job")).sendKeys("QA na Wejump");
-		driver.findElement(By.id("gender")).sendKeys("masculino");
-		driver.findElement(By.id("reset_fields")).click();
 		driver.findElement(By.id("btn_one")).click();
 		driver.findElement(By.id("btn_two")).click();
-		driver.findElement(By.id("btn_three")).click();
 		driver.findElement(By.id("btn_link")).click();
-		driver.findElement(By.id("reset_buttons")).click();
-//		driver.findElement(By.id("xpath=//input[@='opt_one']")).click();
-	
+		Assert.assertFalse(driver.findElement(By.id("btn_one")).isSelected());		
+		Assert.assertFalse(driver.findElement(By.id("btn_two")).isSelected());
+		Assert.assertFalse(driver.findElement(By.id("btn_link")).isSelected());
 		
-							
-//		driver.quit();
+// 		Dentro da mesma página, clique nos botões "One",
+//		"Two" e "Four" que encontram-se dentro do painel
+//		"IFRAME BUTTONS" e valide a não-presença dos mesmos.
 		
+		driver.switchTo().frame(0);
+	    driver.findElement(By.id("btn_one")).click();
+	    driver.findElement(By.id("btn_two")).click();
+	    driver.findElement(By.id("btn_link")).click();
+	    Assert.assertFalse(driver.findElement(By.id("btn_one")).isSelected());		
+		Assert.assertFalse(driver.findElement(By.id("btn_two")).isSelected());
+		Assert.assertFalse(driver.findElement(By.id("btn_link")).isSelected());
+		driver.quit();
 		
 	}
-}
+		
+// 		No cenário final, iremos preencher o campo "YourFirstName" 
+//		com um texto qualquer. Clique no botão "One", cheque a 
+//		opção "OptionThree", selecione a opção "ExampleTwo" dentro 
+//		da select box, e valide a presença da imagem do logo do "Selenium Webdriver".
+		
+	@Test
+	public void cenariofinal() {
+		WebDriver driver = new ChromeDriver();
+		driver.manage().window().maximize();		
+		driver.get("https://wejump-automation-test.github.io/qa-test/");
+		driver.findElement(By.id("first_name")).sendKeys("Miller Cardoso Barros");
+		driver.findElement(By.id("btn_one")).click();
+		driver.findElement(By.id("opt_three")).click();
+		Assert.assertTrue(driver.findElement(By.id("opt_three")).isSelected());
+		WebElement element = driver.findElement(By.id("select_box"));
+		Select combo = new Select(element);
+		combo.selectByVisibleText("ExampleTwo");
+		driver.findElements(By.xpath("//div[@id=\'panel_body_three\']/img[4]"));
+		
+		}
+	}
+
+	
+

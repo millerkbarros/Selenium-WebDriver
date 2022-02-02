@@ -94,7 +94,7 @@ private List<WebElement> allSelectedOptions;
 		List<WebElement> options = combo.getOptions();
 		Assert.assertEquals(8, options.size());
 
-//		Verificar se alguma determina opção está disponível no COMBO				
+//		Verificar se alguma determinada opção está disponível no COMBO				
 		boolean encontrou = false;
 		for(WebElement option: options) {
 			if(option.getText().equals("Mestrado"));
