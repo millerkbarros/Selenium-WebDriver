@@ -1,6 +1,7 @@
 import java.awt.Button;
 import java.util.concurrent.TimeUnit;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.validator.PublicClassValidator;
 import org.openqa.selenium.By;
@@ -16,6 +17,16 @@ import org.openqa.selenium.interactions.ClickAction;
 import org.openqa.selenium.support.ui.Select;
 
 public class TestPaginaBase2Camp {
+
+	private WebDriver driver;
+
+	@Before
+	public void inicializa() {
+		WebDriver driver = new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.get("https://app.pipefy.com/public/form/pITmZMtR");
+		
+	}
 	
 	@Test
 	public void teste() {
@@ -24,10 +35,10 @@ public class TestPaginaBase2Camp {
 		
 		
 		//Abrir Formulário de Candidatura ao Base2Camp 
-		WebDriver driver = new ChromeDriver();
-		driver.manage().window().maximize();
+		//WebDriver driver = new ChromeDriver();
+		//driver.manage().window().maximize();
 		//driver.manage().window().setSize(new Dimension(800, 800));
-		driver.get("https://app.pipefy.com/public/form/pITmZMtR");
+		//driver.get("https://app.pipefy.com/public/form/pITmZMtR");
 		
 		//Preencher campo (Nome completo)
 		driver.findElement(By.name("customFields.nome_do_candidato")).sendKeys("Miller Cardoso Barros");
