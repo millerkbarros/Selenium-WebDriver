@@ -1,3 +1,4 @@
+
 import java.awt.Button;
 import java.util.concurrent.TimeUnit;
 
@@ -22,11 +23,13 @@ public class TestePaginaWebJumper {
 	private WebDriver driver;
 
 	@Before
-	public void inicializa() {
+	public void inicializa() throws InterruptedException{
 		driver = new ChromeDriver();
 		driver.manage().window().setSize(new Dimension(1200, 765));
 		// driver.manage().window().maximize();
 		driver.get("https://wejump-automation-test.github.io/qa-test/");
+		Thread.sleep(5000);
+		//driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 	}
 
 	@After

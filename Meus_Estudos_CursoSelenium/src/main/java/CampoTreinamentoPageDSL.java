@@ -35,6 +35,14 @@ public class TesteCampoTreinamentoDSL {
 	}
 	
 	@Test
+	public void testTextFieldDuplo(){
+		dsl.escrever("elementosForm:nome", "Wagner");
+		Assert.assertEquals("Wagner", dsl.obterValorCampo("elementosForm:nome"));
+		dsl.escrever("elementosForm:nome", "Aquino");
+		Assert.assertEquals("Aquino", dsl.obterValorCampo("elementosForm:nome"));
+	}
+	
+	@Test
 	public void deveIntegarirComTextArea(){
 		dsl.escrever("elementosForm:sugestoes", "teste\n\naasldjdlks\nUltima linha");
 		Assert.assertEquals("teste\n\naasldjdlks\nUltima linha", dsl.obterValorCampo("elementosForm:sugestoes"));
@@ -76,7 +84,7 @@ public class TesteCampoTreinamentoDSL {
 		dsl.deselecionarCombo("elementosForm:esportes", "Corrida");
 		opcoesMarcadas = dsl.obterValoresCombo("elementosForm:esportes");
 		Assert.assertEquals(2, opcoesMarcadas.size());
-		opcoesMarcadas.containsAll(Arrays.asList("Natacao", "O que eh esporte?"));
+		Assert.assertTrue(opcoesMarcadas.containsAll(Arrays.asList("Natacao", "O que eh esporte?")));
 	}
 	
 	@Test
